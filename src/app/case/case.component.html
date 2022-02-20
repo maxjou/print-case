@@ -1,0 +1,45 @@
+<section class="hero is-dark is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+      <div class="tile is-ancestor">
+        <div class="tile is-6 is-vertical is-parent">
+          <div class="tile is-child box ">
+
+            <h1 class="title has-text-black"></h1>
+            <form (ngSubmit)="onSubmit">
+
+              <h1 class="title has-text-black">Enter word</h1>
+              <div class="field has-addons">
+                <input class="input is-primary is-rounded is-focused" type="text"
+                  placeholder="Type word to be formatted" (keyup.enter)="formatWord($event)" name="word">
+              </div>
+            </form>
+          </div>
+          <div class="tile is-child box">
+            <h1 class="title has-text-black">List of previous words</h1>
+            <br>
+            <div *ngFor="let data of formattedWords">
+              <a style="cursor: pointer" class="title is-4 has-text-black is-clickable" type="text"
+                (click)="changeWord(data)">{{data.value}}
+              </a>
+            </div>
+            <br>
+            <button class="button is-danger is-rounded" *ngIf="formattedWords.length > 0"
+              (click)="clearWords()">Clear</button>
+          </div>
+        </div>
+        <div class="tile is-parent">
+          <div class="tile is-child box">
+            <h1 class="title has-text-black">Choose format:</h1>
+            <h2 copyMessage(currentWord.kebabCase)>{{currentWord.kebabCase}}</h2>
+            <h2 copyMessage(currentWord.camelCase)>{{currentWord.camelCase}}</h2>
+            <h2 copyMessage(currentWord.pascalCase)>{{currentWord.pascalCase}}</h2>
+            <h2 copyMessage(currentWord.snakeCaseAllLowerCase)>{{currentWord.snakeCaseAllLowerCase}}</h2>
+            <h2 copyMessage(currentWord.snakeCaseAllUpperCase)>{{currentWord.snakeCaseAllUpperCase}}</h2>
+            <h2 copyMessage(currentWord.snakeCaseFirstLowerRestUpper)>{{currentWord.snakeCaseFirstLowerRestUpper}}</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
