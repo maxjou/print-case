@@ -7,7 +7,7 @@ import { Word } from './word/word';
   templateUrl: './case.component.html',
   styleUrls: ['./case.component.css']
 })
-export class CaseComponent{
+export class CaseComponent implements OnInit {
 
   constructor(private caseService: CaseService) { }
 
@@ -15,22 +15,25 @@ export class CaseComponent{
   currentWord: Word = {}
   onSubmit: any;
 
-  formatWord(event: any){
+  ngOnInit(): void {
+      this.formattedWords = JSON.parse(sessionStorage.getItem("words") || '{}')
+  }
+
+  formatWord(event: any) {
     let word: Word = this.caseService.formatWord(event.target.value);
     this.currentWord = word;
     this.formattedWords.push(word);
-    
+    sessionStorage.setItem("words", JSON.stringify(this.formattedWords))
   }
 
   clearWords() {
     this.formattedWords = [];
+    sessionStorage.clear();
   }
 
   changeWord(word: Word) {
     this.currentWord = word;
   }
-
-
 
   copyMessage(val: string) {
     const selBox = document.createElement('textarea');
