@@ -14,8 +14,10 @@ export class CaseComponent implements OnInit {
   formattedWords: Word[] = [];
   currentWord: Word = {}
   onSubmit: any;
+  latestCopy: string;
 
   ngOnInit(): void {
+      // this.currentWord.camelCase = "ello"
       this.formattedWords = JSON.parse(sessionStorage.getItem("words") || '{}')
   }
 
@@ -35,7 +37,11 @@ export class CaseComponent implements OnInit {
     this.currentWord = word;
   }
 
-  copyMessage(val: string) {
+  objectKeys(word: Word) {
+    return Object.values(word);
+}
+
+  copyMessage(val: any) {
     const selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';
     selBox.style.left = '0';
@@ -47,6 +53,7 @@ export class CaseComponent implements OnInit {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
+    this.latestCopy = val;
   }
 }
 

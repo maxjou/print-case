@@ -8,18 +8,18 @@
             <h1 class="title has-text-black"></h1>
             <form (ngSubmit)="onSubmit">
 
-              <h1 class="title has-text-black">Enter word</h1>
+              <h1 class="title has-text-black">Word... </h1>
               <div class="field has-addons">
-                <input class="input is-primary is-rounded is-focused" type="text"
+                <input class="input is-dark is-rounded is-focused" type="text"
                   placeholder="Type word to be formatted" (keyup.enter)="formatWord($event)" name="word">
               </div>
             </form>
           </div>
           <div class="tile is-child box">
-            <h1 class="title has-text-black">List of previous words</h1>
+            <h1 class="title has-text-black">Previous words</h1>
             <br>
             <div *ngFor="let data of formattedWords">
-              <a style="cursor: pointer" class="title is-4 has-text-black is-clickable" type="text"
+              <a class="title is-5 has-text-black button is-text" type="text"
                 (click)="changeWord(data)">{{data.value}}
               </a>
             </div>
@@ -28,15 +28,21 @@
               (click)="clearWords()">Clear</button>
           </div>
         </div>
-        <div class="tile is-parent">
+        <div class="tile is-parent ">
           <div class="tile is-child box">
-            <h1 class="title has-text-black">Choose format:</h1>
-            <h2 >{{currentWord.kebabCase}}</h2>
-            <h2 >{{currentWord.camelCase}}</h2>
-            <h2 >{{currentWord.pascalCase}}</h2>
-            <h2 >{{currentWord.snakeCaseAllLowerCase}}</h2>
-            <h2 >{{currentWord.snakeCaseAllUpperCase}}</h2>
-            <h2 >{{currentWord.snakeCaseFirstLowerRestUpper}}</h2>
+            <div class="columns">
+              <div class="column is-half">
+                <h1 class="title is-3 has-text-left has-text-black">Choose format</h1>
+              </div>
+              <div *ngIf="latestCopy" class="column is-one-quarter">
+                <h1 class="title is-5 tag is-large is-dark">{{latestCopy}}</h1>
+              </div>
+            </div>
+            <div *ngFor="let word of objectKeys(currentWord); let i=index">
+              <div *ngIf="i != 0">
+                <a class="title is-4 has-text-black button is-text" (click)="copyMessage(word)" >{{word}}</a>
+              </div>
+            </div>
           </div>
         </div>
       </div>

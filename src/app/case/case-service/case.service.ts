@@ -6,7 +6,8 @@ import { Word } from '../word/word';
 })
 export class CaseService {
 
-  formatWord(value: string) {
+  formatWord(input: string) {
+    let value = input.trim()
     let word: Word = {};
     word.value = value;
     word.kebabCase = this.kebabCase(value);
