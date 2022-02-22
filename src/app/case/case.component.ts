@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { CaseService } from './case-service/case.service';
 import { Word } from './word/word';
 
@@ -13,7 +14,7 @@ export class CaseComponent implements OnInit {
 
   formattedWords: Word[] = [];
   currentWord: Word = {}
-  onSubmit: any;
+  // onSubmit: any;
   latestCopy: string;
 
   ngOnInit(): void {
@@ -21,8 +22,9 @@ export class CaseComponent implements OnInit {
       this.formattedWords = JSON.parse(sessionStorage.getItem("words") || '{}')
   }
 
-  formatWord(event: any) {
-    let word: Word = this.caseService.formatWord(event.target.value);
+  onSubmit(f: NgForm) {
+    console.log(f.value.word)
+    let word: Word = this.caseService.formatWord(f.value.word);
     this.currentWord = word;
     this.formattedWords.push(word);
     sessionStorage.setItem("words", JSON.stringify(this.formattedWords))

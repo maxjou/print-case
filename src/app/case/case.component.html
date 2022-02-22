@@ -2,16 +2,21 @@
   <div class="hero-body">
     <div class="container">
       <div class="tile is-ancestor">
-        <div class="tile is-6 is-vertical is-parent">
+        <div class="tile is-vertical is-parent">
           <div class="tile is-child box ">
 
             <h1 class="title has-text-black"></h1>
-            <form (ngSubmit)="onSubmit">
+            <form #f="ngForm" (ngSubmit)="onSubmit(f)">
 
               <h1 class="title has-text-black">Words... </h1>
               <div class="field has-addons">
-                <input class="input is-dark is-rounded is-focused" type="text"
-                  placeholder="Type words to be formatted" (keyup.enter)="formatWord($event)" name="word">
+                <div class="control is-expanded">
+                  <input class="input  is-rounded" type="text"
+                  placeholder="Type words to be formatted" ngModel name="word">
+                </div>
+                <div class="control">
+                  <button class="button is-dark is-rounded" ngModel >Go</button>
+                </div>
               </div>
             </form>
           </div>
