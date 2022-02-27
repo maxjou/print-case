@@ -18,12 +18,11 @@ export class CaseComponent implements OnInit {
   latestCopy: string;
 
   ngOnInit(): void {
-      // this.currentWord.camelCase = "ello"
-      this.formattedWords = JSON.parse(sessionStorage.getItem("words") || '{}')
+    // this.currentWord.camelCase = "ello"
+    this.formattedWords = JSON.parse(sessionStorage.getItem("words") || '[]')
   }
 
   onSubmit(f: NgForm) {
-    console.log(f.value.word)
     let word: Word = this.caseService.formatWord(f.value.word);
     this.currentWord = word;
     this.formattedWords.push(word);
@@ -41,7 +40,12 @@ export class CaseComponent implements OnInit {
 
   objectKeys(word: Word) {
     return Object.values(word);
-}
+  }
+
+  googleSearch(event: any){
+    let search = event.target.value
+    window.location.href = "https://www.google.com/search?q=" + search;
+  }
 
   copyMessage(val: any) {
     const selBox = document.createElement('textarea');
